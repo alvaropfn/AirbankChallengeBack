@@ -1,0 +1,45 @@
+{
+  "name": "airbank-api",
+  "version": "0.0.3",
+  "main": "dist/server.js",
+  "description": "Test server for airbank vacancy.",
+  "author": "alvaropfn",
+  "license": "MIT",
+  "scripts": {
+    "seed": "ts-node src/prisma/seed.ts",
+    "build": "rimraf ./dist && tsc",
+    "migrate": " yes | npx prisma migrate dev",
+    "start": "npm run build && node dist/server.js",
+    "dev": "ts-node-dev --respawn --watch 'src/**' --transpile-only --ignore-watch node_modules -r tsconfig-paths/register  src/server.ts",
+    "copyMySpecialFiles": "copyfiles --error --up 1 src/modules/transactions/graphql/*.gql dist",
+    "postbuild": "npm run copyMySpecialFiles && npm run migrate"
+  },
+  "prisma": {
+    "seed": "ts-node src/prisma/seed.ts",
+    "schema": "src/prisma/schema.prisma"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/mongoose": "^5.11.97",
+    "@types/node": "^17.0.21",
+    "prisma": "^3.10.0",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.5.0",
+    "ts-node-dev": "^1.1.8",
+    "tsconfig-paths": "^3.10.1",
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "@prisma/client": "^3.10.0",
+    "copyfiles": "^2.4.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "express-graphql": "^0.12.0",
+    "graphql": "^15.5.1",
+    "graphql-tools": "^7.0.5",
+    "joi": "^17.6.0",
+    "reflect-metadata": "^0.1.13",
+    "tsyringe": "^4.6.0"
+  }
+}
